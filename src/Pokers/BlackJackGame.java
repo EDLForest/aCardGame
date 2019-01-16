@@ -1,18 +1,38 @@
 package Pokers;
 
+import Factories.DeckFactory;
 import base.Game;
-import base.Player;
 
 public class BlackJackGame extends Game {
 
-    private PokerDeck theDeck = new PokerDeck(false);
-    Player<PokerDeck>[] players;
+    private PokerDeck theDeck = DeckFactory.GET_POKER_DECK_WITH_JOKER();
+    private PokerPlayer[] players;
 
     public BlackJackGame (String gameName, int numberOfPlayer){
         setName(gameName);
-        players = new Player[numberOfPlayer];
-        for(Player<PokerDeck> player : players){
+        initializePlayers(numberOfPlayer);
+    }
 
+    public void startGame(){
+        dealCard();
+
+    }
+
+    private void initializePlayers(int numberOfPlayer){
+        players = new PokerPlayer[numberOfPlayer];
+    }
+
+    @Override
+    public void dealCard() {
+        for (PokerPlayer player : players){
+            player.addCardListToHand(theDeck.drawCards(2));
         }
+    }
+
+
+
+    public static void main(String args[]) {
+        BlackJackGame theGame = new BlackJackGame("testGame", 1);
+        theGame.startGame();
     }
 }

@@ -1,9 +1,11 @@
 package base;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Random;
 
-public class Deck<CardType extends Card> {
+public abstract class Deck<CardType extends Card> {
 
     private static Random random = new Random();
 
@@ -15,7 +17,6 @@ public class Deck<CardType extends Card> {
      * of generating the identifier of the deck. The initiation
      * and generation of the content of the Deck should be handled
      * by a child class.
-     * TODO: Try to do that through the spring frame work.
      */
     public Deck(){
          DECK_ID = 10101010;
@@ -23,8 +24,7 @@ public class Deck<CardType extends Card> {
     }
 
     /**
-     * This method describes the process of drawing one card from
-     * the end of the Deck.
+     * This method draws one card from the end of the Deck.
      * @return A Card object if the Deck is not empty
      * @return null is the Deck is empty
      */
@@ -37,10 +37,10 @@ public class Deck<CardType extends Card> {
     }
 
     /**
-     * This method describes the process of drawing multiple cards
+     * This method will draw multiple cards
      * from the end of the Deck. the cards drew will be returned as
      * an ArrayList of Card objects. If the Deck ran out of cards
-     * during the draw, then return the cards that are drawn so far.
+     * during the draw, then the method returns the cards that are drawn so far.
      * @param cardNumber The numbers of cards to draw from the Deck
      * @return ArrayList of Card object of size cardNumber if there
      *          is sufficient numbers of cards in the Deck
@@ -58,7 +58,7 @@ public class Deck<CardType extends Card> {
     }
 
     /**
-     * This Method describes the process of shuffling the deck
+     * This Method shuffles the deck.
      * The method starts at the end of the Deck and swap the
      * card with a randomly selected card in the Deck.
      */
@@ -71,15 +71,17 @@ public class Deck<CardType extends Card> {
             //generate target position with bound 0<=destinationPos<=sourcePos
             int destinationPos = random.nextInt(sourcePos+1);
 
-            CardType swappedCard = Cards.remove(destinationPos);
-            Cards.add(destinationPos, Cards.remove(sourcePos));
-            Cards.add(sourcePos, swappedCard);
+            Collections.swap(Cards, sourcePos, destinationPos);
+
+//            CardType swappedCard = Cards.remove(destinationPos);
+//            Cards.add(destinationPos, Cards.remove(sourcePos));
+//            Cards.add(sourcePos, swappedCard);
         }
     }
 
     /**
-     * This method describe the process of shuffling a card into the
-     * deck, the method insert the given card and insert it in a random
+     * This method shuffles a card into the deck,
+     * the method insert the given card in a random
      * position in the Deck
      * @param card The Card object that is to be shuffled into the Deck
      */
@@ -93,17 +95,17 @@ public class Deck<CardType extends Card> {
 
     /**
      * This method shuffles an arrayList of cards into the Deck
-     * @param cardsToBeInserted The ArrayList of Card to be shuffled
-     *                          into the Deck
+     * @param cardList The ArrayList of Card to be shuffled
+     *                 into the Deck
      */
-    public void suffleIntoDeck(ArrayList<CardType> cardsToBeInserted){
-        if (cardsToBeInserted.isEmpty()) {
+    public void shuffleIntoDeck(ArrayList<CardType> cardList){
+        if (cardList.isEmpty()) {
             return;
         }
         if(Cards.isEmpty()) {
-            Cards.add(cardsToBeInserted.get(0));
+            Cards.add(cardList.get(0));
         }
-        for(CardType card : cardsToBeInserted){
+        for(CardType card : cardList){
             Cards.add(random.nextInt(Cards.size()), card);
         }
     }

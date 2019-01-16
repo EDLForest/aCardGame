@@ -11,7 +11,9 @@ public abstract class Game {
         return name;
     }
 
-    public void setName(String name) {
+    protected void setName(String name) {
         this.name = name;
     }
+
+    public abstract void dealCard();
 }

@@ -2,12 +2,11 @@ package base;
 
 import java.util.ArrayList;
 
-public class Player<HandType extends Deck> {
-    HandType playerHand;
+public abstract class Player<CardType extends Card> {
+    protected Deck<CardType> playerHand;
 
+    public abstract void addCardToHand(CardType card);
 
-    public void addToHand(Card card){
-        playerHand.shuffleIntoDeck(card);
-    }
+    public abstract void addCardListToHand(ArrayList<CardType> cardList);
 
 }
