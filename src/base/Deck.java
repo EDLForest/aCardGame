@@ -66,16 +66,10 @@ public abstract class Deck<CardType extends Card> {
         if (Cards.isEmpty()){
             return;
         }
-
         for (int sourcePos = Cards.size()-1; sourcePos > 0; sourcePos--){
             //generate target position with bound 0<=destinationPos<=sourcePos
             int destinationPos = random.nextInt(sourcePos+1);
-
             Collections.swap(Cards, sourcePos, destinationPos);
-
-//            CardType swappedCard = Cards.remove(destinationPos);
-//            Cards.add(destinationPos, Cards.remove(sourcePos));
-//            Cards.add(sourcePos, swappedCard);
         }
     }
 
@@ -90,7 +84,7 @@ public abstract class Deck<CardType extends Card> {
             Cards.add(card);
             return;
         }
-        Cards.add(random.nextInt(Cards.size()), card);
+        Cards.add(random.nextInt(Cards.size()+1), card);
     }
 
     /**
@@ -103,21 +97,30 @@ public abstract class Deck<CardType extends Card> {
             return;
         }
         if(Cards.isEmpty()) {
-            Cards.add(cardList.get(0));
+            Cards.add(cardList.remove(0));
         }
         for(CardType card : cardList){
-            Cards.add(random.nextInt(Cards.size()), card);
+            Cards.add(random.nextInt(Cards.size()+1), card);
         }
     }
+
+    public boolean containCardWithKeyword(String keyword) {
+        for (CardType card : Cards) {
+            if (card.getName().contains(keyword)){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     public int getNumOfCards(){
         return Cards.size();
     }
 
+    @Override
     public String toString() {
         StringBuilder deckStringBuilder = new StringBuilder();
-        deckStringBuilder.append("Deck ID: " + DECK_ID + "\n");
-        deckStringBuilder.append("There are " + getNumOfCards() + " cards:\n");
         for (Card card : Cards){
             deckStringBuilder.append(card.toString() + "\n");
         }

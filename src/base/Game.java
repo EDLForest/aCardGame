@@ -16,4 +16,6 @@ public abstract class Game {
     }
 
     public abstract void dealCard();
+
+    public abstract void playerShowHand();
 }

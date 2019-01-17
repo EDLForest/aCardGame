@@ -1,32 +1,38 @@
 package Factories;
 
-import Pokers.*;
+import PlayingCards.*;
+import PlayingCards.BlackJackCardValue;
 
 import java.util.EnumSet;
 
 public class DeckFactory {
 
 
-    public static PokerDeck GET_POKER_DECK_EMPTY() {
-        return new PokerDeck();
+    public static PlayingCardDeck GET_POKER_DECK_EMPTY() {
+        return new PlayingCardDeck();
     }
 
-    public static PokerDeck GET_POKER_DECK_NO_JOKER() {
-        PokerDeck newDeck = GET_POKER_DECK_EMPTY();
+    public static PlayingCardDeck GET_POKER_DECK_NO_JOKER() {
+        PlayingCardDeck newDeck = GET_POKER_DECK_EMPTY();
         EnumSet.allOf(Suit.class).forEach((Suit suit) -> {
-            if (suit == Suit.JOKER) return;
-            EnumSet.allOf(CardValue.class).forEach((CardValue cardValue) -> {
-                if (cardValue == CardValue.JOKER) return;
+            EnumSet.allOf(PokerCardValue.class).forEach((PokerCardValue cardValue) -> {
                 newDeck.shuffleIntoDeck(CardFactory.GET_POKER_CARD(suit, cardValue));
             });
         });
         return newDeck;
     }
 
-    public static PokerDeck GET_POKER_DECK_WITH_JOKER() {
-        PokerDeck newDeck = GET_POKER_DECK_NO_JOKER();
-        newDeck.shuffleIntoDeck(CardFactory.GET_POKER_CARD(Suit.JOKER, CardValue.JOKER));
-        newDeck.shuffleIntoDeck(CardFactory.GET_POKER_CARD(Suit.JOKER, CardValue.JOKER));
+    public static PlayingCardDeck GET_BLACKJACK_DECK_EMPTY(){
+        return new PlayingCardDeck();
+    }
+
+    public static PlayingCardDeck GET_BLACKJACK_DECK_NO_JOKER(){
+        PlayingCardDeck newDeck = GET_POKER_DECK_EMPTY();
+        EnumSet.allOf(Suit.class).forEach((Suit suit) -> {
+            EnumSet.allOf(BlackJackCardValue.class).forEach((BlackJackCardValue cardValue) -> {
+                newDeck.shuffleIntoDeck(CardFactory.GET_BLACKJACK_CARD(suit, cardValue));
+            });
+        });
         return newDeck;
     }
 

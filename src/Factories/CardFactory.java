@@ -1,12 +1,15 @@
 package Factories;
 
-import Pokers.CardValue;
-import Pokers.PokerCard;
-import Pokers.Suit;
+import PlayingCards.*;
 
 public class CardFactory {
 
-    public static PokerCard GET_POKER_CARD(Suit cardSuit, CardValue cardValue){
-        return new PokerCard(cardSuit, cardValue);
+    public static PlayingCard GET_POKER_CARD(Suit cardSuit, PokerCardValue pokerCardValue){
+        return new PlayingCard(cardSuit, pokerCardValue);
     }
+
+    public static PlayingCard GET_BLACKJACK_CARD(Suit cardSuit, BlackJackCardValue blackJackCardValue){
+        return new PlayingCard(cardSuit, blackJackCardValue);
+    }
+
 }
