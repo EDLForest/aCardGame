@@ -29,12 +29,12 @@ public class PlayingCard<CardValueType extends IEnumCardValue> extends Card {
         return value;
     }
 
-    public int getNumericValue(){
-        return value.getNumericValue();
-    }
-
     public void setValue(CardValueType value) {
         this.value = value;
+    }
+
+    public int getNumericValue(){
+        return value.getNumericValue();
     }
 
     @Override

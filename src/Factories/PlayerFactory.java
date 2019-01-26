@@ -1,16 +1,11 @@
 package Factories;
 
-import PlayingCards.BlackJackPlayer;
-import PlayingCards.PokerPlayer;
+import base.Player;
 
-public class PlayerFactory {
+public abstract class PlayerFactory {
 
 
-    public static PokerPlayer GET_POKER_PLAYER(){
-        return new PokerPlayer();
-    }
+    public abstract Player makePlayer();
+    public abstract Player makePlayer(String playerName);
 
-    public static BlackJackPlayer GET_BLACKJACK_PLAYER(){
-        return new BlackJackPlayer();
-    }
 }

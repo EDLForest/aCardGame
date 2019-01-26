@@ -3,6 +3,8 @@ package base;
 import java.util.ArrayList;
 
 public abstract class Player<CardType extends Card> {
+
+    private String playerName;
     protected Deck<CardType> playerHand;
 
     public void addCardToHand(CardType card){
@@ -13,4 +15,11 @@ public abstract class Player<CardType extends Card> {
         playerHand.shuffleIntoDeck(cardList);
     }
 
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
 }
