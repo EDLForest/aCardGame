@@ -1,4 +1,4 @@
-package edlforest.base;
+package com.haosen.edlforest.base;
 
 public abstract class Card {
     private String name;

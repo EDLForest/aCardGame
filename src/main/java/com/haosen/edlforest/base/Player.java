@@ -1,4 +1,4 @@
-package edlforest.base;
+package com.haosen.edlforest.base;
 
 import java.util.ArrayList;
 
